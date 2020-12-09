@@ -1,18 +1,18 @@
 import tweepy
 import time
+import config
 
 
-CONSUMER_KEY = "CONSUMER_KEY"
-CONSUMER_SECRET = "CONSUMER_SECRET"
-ACCESS_TOKEN = "ACCESS_TOKEN"
-ACCESS_SECRET = "ACCESS_SECRET"
+CONSUMER_KEY = config.API_KEY
+CONSUMER_SECRET = config.API_SECRET_KEY
+ACCESS_TOKEN = config.ACCESS_TOKEN
+ACCESS_SECRET = config.ACCESS_TOKEN_SECRET
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 api = tweepy.API(auth)
 
 
-users = ["id1", "id2"]
 
 class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
@@ -25,4 +25,4 @@ class MyStreamListener(tweepy.StreamListener):
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(follow = users)
+myStream.filter(follow = config.users)
