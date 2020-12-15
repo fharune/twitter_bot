@@ -16,12 +16,12 @@ api = tweepy.API(auth)
 
 class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
-        if "@" not in status.text:
-                try:
-                    tweet_id = status.id
-                    api.retweet(tweet_id)
-                except Exception as e:
-                    print(e)
+            try:
+                tweet_id = status.id
+                api.retweet(tweet_id)
+            except Exception as e:
+                print(e)
+
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
