@@ -16,7 +16,7 @@ api = tweepy.API(auth)
 
 class MyStreamListener(tweepy.StreamListener):
     def on_status(self, status):
-        if ((not status.retweeted) and ("RT @" not in status.text)) and ("@" not in status.text):
+        if "@" not in status.text:
                 try:
                     tweet_id = status.id
                     api.retweet(tweet_id)
